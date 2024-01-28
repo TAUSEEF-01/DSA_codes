@@ -1,0 +1,32 @@
+printing list from begining after insertion at the end: 
+1 2 3 4 5 
+
+printing list from the end after insertion at the end: 
+5 4 3 2 1 
+
+printing list after insertion at first: 
+1000 100 1 2 3 4 5 
+
+printing list after deleting the first element: 
+100 1 2 3 4 5 
+
+printing list after deleting the last element: 
+100 1 2 3 4 
+
+printing list after deleting the target node: 
+100 1 2 4 
+
+printing list from the end: 
+4 2 1 100 
+
+printing list from the begin: 
+100 1 2 4 1000 
+
+printing list from the end: 
+1000 4 2 1 100 
+
+printing list from the end: 
+1000 4 2 1 100 
+
+printing list from begining after insertion at the end: 
+100 1 2 4 1000 500 
