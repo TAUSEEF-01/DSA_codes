@@ -1,6 +1,106 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// // implementing stack
+// struct Stack
+// {
+//     struct LinkedList
+//     {
+//         int val;
+//         char ch;
+//         string str;
+//         LinkedList* next;
+//     };
+
+//     LinkedList* head = NULL;
+//     LinkedList* tail = NULL;
+
+//     void push(char c)
+//     {
+//         LinkedList* node = (LinkedList*)malloc(sizeof(LinkedList));
+//         node->ch = c;
+//         node->next = NULL;
+
+//         if(head == NULL)
+//         {
+//             head = tail = node;
+//             return;
+//         }
+
+//         tail->next = node;
+//         tail = node;
+//     }
+
+//     void push(int v)
+//     {
+//         LinkedList* node = (LinkedList*)malloc(sizeof(LinkedList));
+//         node->val = v;
+//         node->next = NULL;
+
+//         if(head == NULL)
+//         {
+//             head = tail = node;
+//             return;
+//         }
+
+//         tail->next = node;
+//         tail = node;
+//     }
+
+//     void push(string s)
+//     {
+//         LinkedList* node = (LinkedList*)malloc(sizeof(LinkedList));
+//         node->str = s;
+//         node->next = NULL;
+
+//         if(head == NULL)
+//         {
+//             head = tail = node;
+//             return;
+//         }
+
+//         tail->next = node;
+//         tail = node;
+//     }
+
+//     void pop()
+//     {
+//         if(head == NULL)
+//             return;
+
+//         LinkedList* node = head;
+//         while(node->next != tail)
+//             node = node->next;
+        
+//         tail = node;
+//         tail->next = NULL;
+//     }
+
+//     char top(char c = 'c')
+//     {
+//         return tail->ch;
+//     }   
+
+//     int top(int v = 1)
+//     {
+//         return tail->val;
+//     }
+
+//     string top(string s = "")
+//     {
+//         return tail->str;
+//     }
+
+//     bool empty()
+//     {
+//         if(head == NULL)
+//             return true;
+//         else 
+//             return false;
+//     }
+// };
+
+
 // implementing stack
 struct Stack
 {
@@ -9,19 +109,19 @@ struct Stack
         int val;
         char ch;
         string str;
-        LinkedList* next;
+        LinkedList *next;
     };
 
-    LinkedList* head = NULL;
-    LinkedList* tail = NULL;
+    LinkedList *head = NULL;
+    LinkedList *tail = NULL;
 
     void push(char c)
     {
-        LinkedList* node = (LinkedList*)malloc(sizeof(LinkedList));
+        LinkedList *node = (LinkedList *)malloc(sizeof(LinkedList));
         node->ch = c;
         node->next = NULL;
 
-        if(head == NULL)
+        if (head == NULL)
         {
             head = tail = node;
             return;
@@ -33,11 +133,11 @@ struct Stack
 
     void push(int v)
     {
-        LinkedList* node = (LinkedList*)malloc(sizeof(LinkedList));
+        LinkedList *node = (LinkedList *)malloc(sizeof(LinkedList));
         node->val = v;
         node->next = NULL;
 
-        if(head == NULL)
+        if (head == NULL)
         {
             head = tail = node;
             return;
@@ -49,11 +149,11 @@ struct Stack
 
     void push(string s)
     {
-        LinkedList* node = (LinkedList*)malloc(sizeof(LinkedList));
+        LinkedList *node = (LinkedList *)malloc(sizeof(LinkedList));
         node->str = s;
         node->next = NULL;
 
-        if(head == NULL)
+        if (head == NULL)
         {
             head = tail = node;
             return;
@@ -65,37 +165,46 @@ struct Stack
 
     void pop()
     {
-        if(head == NULL)
+        if (head == tail)
+        {
+            head = tail = NULL;
             return;
+        }
 
-        LinkedList* node = head;
-        while(node->next != tail)
+        LinkedList *node = head;
+        while (node->next != tail)
             node = node->next;
-        
+
         tail = node;
         tail->next = NULL;
     }
 
-    char top(char c = 'c')
+    char top(char c)
     {
+        if (tail == NULL)
+            return '@';
         return tail->ch;
-    }   
+    }
 
-    int top(int v = 1)
+    int top(int v)
     {
+        if (tail == NULL)
+            return 0;
         return tail->val;
     }
 
-    string top(string s = "")
+    string top(string s)
     {
+        if (tail == NULL)
+            return "";
         return tail->str;
     }
 
     bool empty()
     {
-        if(head == NULL)
+        if (tail == NULL)
             return true;
-        else 
+        else
             return false;
     }
 };
