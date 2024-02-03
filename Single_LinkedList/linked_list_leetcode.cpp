@@ -70,6 +70,28 @@ struct ListNode {
 
 		head = reverseNode(nn);
 	}
+
+	void removeNthFromEnd2(int n) {
+
+		node* it = head;
+		for(int i = 0; i < n; i++)
+			it = it->next;
+
+		if(it == NULL)
+		{
+			head = head->next;
+			return;
+		}
+
+		node* curr = head;
+		while(it->next != NULL)
+		{
+			curr = curr->next;
+			it = it->next;
+		} 
+
+		curr->next = curr->next->next;
+	}
 };
 
 
@@ -78,8 +100,8 @@ int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0); cout.tie(0);
 
-	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "w", stdout);
+	// freopen("input.txt", "r", stdin);
+	// freopen("output.txt", "w", stdout);
 
 
 	ListNode list;
@@ -89,7 +111,8 @@ int main() {
 	list.append(4);
 	list.append(5);
 
-	list.removeNthFromEnd(2);
+	// list.removeNthFromEnd2(2);
+	list.removeNthFromEnd2(5);
 	list.printList(); 
 
 	return 0;
