@@ -67,6 +67,26 @@ struct Queue
             false;
     }
 
+    void sort()
+    {
+        LinkedList *node1 = head;
+        while (node1)
+        {
+            LinkedList *node2 = head;
+            while (node2)
+            {
+                if (node2->val > node1->val)
+                {
+                    int temp = node2->val;
+                    node2->val = node1->val;
+                    node1->val = temp;
+                }
+                node2 = node2->next;
+            }
+            node1 = node1->next;
+        }
+    }
+
     void print()
     {
         LinkedList *node = head;
@@ -94,13 +114,15 @@ int main()
     }
 
     q.print();
-
-    int value = q.front();
-    int value2 = q.back();
-    cout << value << ' ' << value2 << endl;
-
-    q.pop();
+    q.sort();
     q.print();
+
+    // int value = q.front();
+    // int value2 = q.back();
+    // cout << value << ' ' << value2 << endl;
+
+    // q.pop();
+    // q.print();
 
     return 0;
 }
