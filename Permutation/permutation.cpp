@@ -1,47 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void print_stk(stack<char> stk)
-{
-    while (!stk.empty())
-    {
-        char ch = stk.top();
-        cout << ch;
-        stk.pop();
-    }
-    cout << endl;
-}
-
-void generate_permutation(stack<char> stk, string voc, string a, int sz)
+void generate_permutation(stack<char> stk, string a, int sz)
 {
     if (stk.size() == sz)
     {
-        print_stk(stk);
+        while (!stk.empty())
+        {
+            cout << stk.top();
+            stk.pop();
+        }
+        cout << endl;
+        
         return;
     }
-    for (int i = 0; i < a.size(); i++)
+    for (int i = 0; i < sz; i++)
     {
         stack<char> temp = stk;
         temp.push(a[i]);
 
-        string s = "";
-        s += a[i];
-
-        generate_permutation(temp, s, a, sz);
+        generate_permutation(temp, a, sz);
     }
 }
 
 int main()
 {
-    string a = "hello";
-    stack<char> s;
-    int sz = a.size();
+    string s = "";
+    string a;
+    cin >> a;
 
-    generate_permutation(s, "", a, sz);
+    stack<char> stk;
+
+    generate_permutation(stk, a, a.size());
 
     return 0;
 }
-
 
 
 // #include <bits/stdc++.h>
