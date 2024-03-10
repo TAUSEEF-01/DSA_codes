@@ -12,6 +12,7 @@ struct inPostFix
 
     Stack *head = NULL;
     Stack *tail = NULL;
+    
 
     void push(string ch)
     {

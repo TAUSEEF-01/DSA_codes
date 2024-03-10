@@ -76,7 +76,7 @@ struct inPostFix
         {
             cout<<node->val;
             node = node->next;
-        }
+        }   
         cout << endl;
     }
 };

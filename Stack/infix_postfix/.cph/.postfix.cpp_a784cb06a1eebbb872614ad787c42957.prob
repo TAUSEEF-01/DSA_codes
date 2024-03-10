@@ -1,0 +1,1 @@
+{"name":"Local: postfix","url":"/home/mdtauseef/Desktop/CSEDU/2_1/DSA/DSA_codes/Stack/infix_postfix/postfix.cpp","tests":[{"id":1710086934972,"input":"ab+cd*-","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/mdtauseef/Desktop/CSEDU/2_1/DSA/DSA_codes/Stack/infix_postfix/postfix.cpp","group":"local","local":true}
