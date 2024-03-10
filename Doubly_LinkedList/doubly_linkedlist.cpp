@@ -62,8 +62,10 @@ struct LinkedList
         {
             return;
         }
+        Node *it = head->prev;
         head = head->next;
         head->prev = nullptr;
+        free(it);
     }
 
 
@@ -74,8 +76,10 @@ struct LinkedList
             return;
         }
 
+        Node *it = tail->next;
         tail = tail->prev;
         tail->next = nullptr;
+        free(it);
     }
 
 
@@ -97,10 +101,12 @@ struct LinkedList
 
         if(it)
         {
+            Node *del = it;
             Node* temp = it->prev;
             temp->next = it->next;
             it = it->next;
             it->prev = temp;
+            free(del);
         }
     }
 
@@ -127,6 +133,20 @@ struct LinkedList
         cout<<endl;
     }
 
+    void Free()
+    {
+        Node *it;
+        while(head)
+        {
+            it = head;
+            head->prev = nullptr;
+            head = head->next;
+            free(it);
+        }
+        tail = nullptr;
+        free(tail);
+    }
+
 };
 
 
@@ -136,8 +156,8 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
 
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
 
     LinkedList list;
 
@@ -147,7 +167,7 @@ int main()
     list.insert_end(4);
     list.insert_end(5);
 
-    cout << "printing list from begining after insertion at the end: \n";
+    cout << "printing list from beginning after insertion at the end: \n";
     list.PrintList_begin();
 
     cout << "\nprinting list from the end after insertion at the end: \n";
@@ -194,6 +214,14 @@ int main()
     list.insert_end(500);
     cout << "\nprinting list from begining after insertion at the end: \n";
     list.PrintList_begin();
+
+    list.Free();
+
+    cout << "\nAfter Freeing the memory --> printing list from the begin: \n";
+    list.PrintList_begin();
+
+    cout << "\nAfter Freeing the memory --> printing list from the end: \n";
+    list.PrintList_end();
 
     return 0;
 }
