@@ -47,9 +47,47 @@ struct Tree
                 temp->left = it;
             }
         }
-        else
+    }
+
+    void insertMiddle(int parent, int child, int pos)
+    {
+        Node *it = (Node *)malloc(sizeof(Node));
+        it->val = child;
+        it->left = nullptr;
+        it->right = nullptr;
+
+        temp = nullptr;
+
+        if (node_inorder(root, parent))
         {
-            cout << "NO\n";
+            if (pos)
+            {
+                if (temp->right)
+                {
+                    Node *store = (Node *)malloc(sizeof(Node));
+                    store = temp->right;
+                    temp->right = it;
+                    it->right = store;
+                }
+                else
+                {
+                    temp->right = it;
+                }
+            }
+            else
+            {
+                if (temp->left)
+                {
+                    Node *store = (Node *)malloc(sizeof(Node));
+                    store = temp->left;
+                    temp->left = it;
+                    it->left = store;
+                }
+                else
+                {
+                    temp->left = it;
+                }
+            }
         }
     }
 
@@ -176,7 +214,33 @@ int main()
     tree.postorderTraversal();
     cout << endl;
 
-    tree.replace_val(1, 11);
+    cout << endl;
+
+    cout << "Inorder traversal: ";
+    tree.inorderTraversal();
+    cout << endl;
+
+    tree.replace_val(4, 11);
+    cout << "Inorder traversal: ";
+    tree.inorderTraversal();
+    cout << endl;
+
+    tree.replace_val(11, 4);
+    cout << "Inorder traversal: ";
+    tree.inorderTraversal();
+    cout << endl;
+
+    tree.insertMiddle(5, 25, 1);
+    cout << "Inorder traversal: ";
+    tree.inorderTraversal();
+    cout << endl;
+
+    tree.insertMiddle(5, 45, 0);
+    cout << "Inorder traversal: ";
+    tree.inorderTraversal();
+    cout << endl;
+
+    tree.insertMiddle(1, 100, 0);
     cout << "Inorder traversal: ";
     tree.inorderTraversal();
     cout << endl;
