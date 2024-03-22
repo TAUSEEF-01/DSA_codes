@@ -1,24 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-/*
-input -->
-10
-5 4 2 8 6 9 10 3 1 7
-
-output -->
-Inorder traversal: 1 2 3 4 5 6 7 8 9 10 
-Preorder traversal: 5 4 2 1 3 8 6 7 9 10 
-Postorder traversal: 1 3 2 4 7 6 10 9 8 5 
-Inorder traversal: 1 2 3 4 5 6 7 8 9 11 
-Inorder traversal: 1 2 3 4 5 6 7 8 9 10 11 
-Inorder traversal: 1 2 2 3 4 5 6 7 8 9 10 11
-
-*/
-
-
-
-struct Binary_tree
+struct Tree
 {
     struct Node
     {
@@ -28,61 +11,65 @@ struct Binary_tree
     };
 
     Node *root;
+    Node *temp;
 
-    Binary_tree()
+    Tree()
     {
         root = nullptr;
+        temp = nullptr;
     }
 
-    void insert(int value)
+    void insert_root(int value)
+    {
+        root = (Node *)malloc(sizeof(Node));
+        root->val = value;
+        root->left = nullptr;
+        root->right = nullptr;
+    }
+
+    void insertForBuildingTree(int parent, int child, int pos)
     {
         Node *it = (Node *)malloc(sizeof(Node));
-        it->val = value;
+        it->val = child;
         it->left = nullptr;
         it->right = nullptr;
 
-        if (!root)
-        {
-            root = it;
-            return;
-        }
+        temp = nullptr;
 
-        Node *curr = root;
-        while (1)
+        if (node_inorder(root, parent))
         {
-            if (value < curr->val)
+            if (pos)
             {
-                if (curr->left != nullptr)
-                {
-                    curr = curr->left;
-                }
-                else
-                {
-                    Node *l = (Node *)malloc(sizeof(Node));
-                    l->val = value;
-                    l->left = nullptr;
-                    l->right = nullptr;
-                    curr->left = l;
-                    break;
-                }
+                temp->right = it;
             }
             else
             {
-                if (curr->right != nullptr)
-                {
-                    curr = curr->right;
-                }
-                else
-                {
-                    Node *r = (Node *)malloc(sizeof(Node));
-                    r->val = value;
-                    r->left = nullptr;
-                    r->right = nullptr;
-                    curr->right = r;
-                    break;
-                }
+                temp->left = it;
             }
         }
+        else
+        {
+            cout << "NO\n";
+        }
+    }
+
+    bool node_inorder(Node *it, int value)
+    {
+        if (!it)
+        {
+            return false;
+        }
+
+        if (it->val == value)
+        {
+            temp = it;
+            return true;
+        }
+
+        bool ok1 = node_inorder(it->left, value);
+        bool ok2 = node_inorder(it->right, value);
+
+        return (ok1 | ok2);
     }
 
     void inorderTraversal()
@@ -160,16 +147,21 @@ struct Binary_tree
 
 int main()
 {
-    Binary_tree tree;
+    Tree tree;
+
+    int rootVal;
+    cin >> rootVal;
+
+    tree.insert_root(rootVal);
 
     int n;
     cin >> n;
 
     for (int i = 0; i < n; i++)
     {
-        int x;
-        cin >> x;
-        tree.insert(x);
+        int parent, child, pos;
+        cin >> parent >> child >> pos;
+        tree.insertForBuildingTree(parent, child, pos);
     }
 
     cout << "Inorder traversal: ";
@@ -180,21 +172,11 @@ int main()
     tree.preorderTraversal();
     cout << endl;
 
-    cout << "Postorder traversal: ";
+    cout << "Postorder tra versal: ";
     tree.postorderTraversal();
     cout << endl;
 
-    tree.replace_val(10, 11);
-    cout << "Inorder traversal: ";
-    tree.inorderTraversal();
-    cout << endl;
-
-    tree.insert(10);
-    cout << "Inorder traversal: ";
-    tree.inorderTraversal();
-    cout << endl;
-
-    tree.insert(2);
+    tree.replace_val(1, 11);
     cout << "Inorder traversal: ";
     tree.inorderTraversal();
     cout << endl;
