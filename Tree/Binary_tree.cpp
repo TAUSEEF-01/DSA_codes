@@ -1,6 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/*
+input -->
+10
+5 4 2 8 6 9 10 3 1 7
+
+output -->
+Inorder traversal: 1 2 3 4 5 6 7 8 9 10 
+Preorder traversal: 5 4 2 1 3 8 6 7 9 10 
+Postorder traversal: 1 3 2 4 7 6 10 9 8 5 
+Inorder traversal: 1 2 3 4 5 6 7 8 9 11 
+Inorder traversal: 1 2 3 4 5 6 7 8 9 10 11 
+Inorder traversal: 1 2 2 3 4 5 6 7 8 9 10 11
+
+*/
+
+
+
 struct Tree
 {
     struct Node
@@ -173,6 +190,11 @@ int main()
     cout << endl;
 
     tree.insert(10);
+    cout << "Inorder traversal: ";
+    tree.inorderTraversal();
+    cout << endl;
+
+    tree.insert(2);
     cout << "Inorder traversal: ";
     tree.inorderTraversal();
     cout << endl;
