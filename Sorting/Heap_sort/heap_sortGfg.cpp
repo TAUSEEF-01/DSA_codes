@@ -158,6 +158,14 @@ int main()
         cin >> arr[i];
     }
 
+    for (int i = n / 2 - 1; i >= 0; i--)
+    {
+        heapify(arr, n, i);
+        // printArray(arr, n);
+    }
+
+    printArray(arr, n);
+
     heapSort(arr, n);
 
     cout << "Sorted array is \n";
