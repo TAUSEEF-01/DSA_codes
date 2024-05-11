@@ -1,39 +1,33 @@
-// C++ program to insert a node in AVL tree
 #include <bits/stdc++.h>
 using namespace std;
 
-// An AVL tree node
 struct Node
 {
-    int key;
+    int value;
     Node *left;
     Node *right;
     int height;
 };
 
-int height(Node *N)
+int height(Node *node)
 {
-    if (N == NULL)
+    if (node == NULL)
         return 0;
-    return N->height;
+
+    return node->height;
 }
 
-int max(int a, int b)
-{
-    return (a > b) ? a : b;
-}
-
-Node *newNode(int key)
+Node *newNode(int value)
 {
     Node *node = new Node();
-    node->key = key;
+    node->value = value;
     node->left = NULL;
     node->right = NULL;
     node->height = 1;
     return (node);
 }
 
-Node *rightRotate(Node *y)
+Node *right_Rotate(Node *y)
 {
     Node *x = y->left;
     Node *T2 = x->right;
@@ -47,7 +41,7 @@ Node *rightRotate(Node *y)
     return x;
 }
 
-Node *leftRotate(Node *x)
+Node *left_Rotate(Node *x)
 {
     Node *y = x->right;
     Node *T2 = y->left;
@@ -61,51 +55,50 @@ Node *leftRotate(Node *x)
     return y;
 }
 
-int getBalance(Node *N)
-{
-    if (N == NULL)
-        return 0;
-
-    return height(N->left) - height(N->right);
-}
-
-Node *insert(Node *node, int key)
+int get_balance_factor(Node *node)
 {
     if (node == NULL)
-        return (newNode(key));
+        return 0;
 
-    if (key < node->key)
-        node->left = insert(node->left, key);
-    else if (key > node->key)
-        node->right = insert(node->right, key);
+    return height(node->left) - height(node->right);
+}
+
+Node *insert(Node *node, int value)
+{
+    if (node == NULL)
+        return (newNode(value));
+
+    if (value < node->value)
+        node->left = insert(node->left, value);
+    else if (value > node->value)
+        node->right = insert(node->right, value);
     else
         return node;
 
-    node->height = 1 + max(height(node->left),
-                           height(node->right));
+    node->height = 1 + max(height(node->left), height(node->right));
 
-    int balance = getBalance(node);
+    int balance = get_balance_factor(node);
 
     // Left Left Case
-    if (balance > 1 && key < node->left->key)
-        return rightRotate(node);
+    if (balance > 1 && value < node->left->value)
+        return right_Rotate(node);
 
     // Right Right Case
-    if (balance < -1 && key > node->right->key)
-        return leftRotate(node);
+    if (balance < -1 && value > node->right->value)
+        return left_Rotate(node);
 
     // Left Right Case
-    if (balance > 1 && key > node->left->key)
+    if (balance > 1 && value > node->left->value)
     {
-        node->left = leftRotate(node->left);
-        return rightRotate(node);
+        node->left = left_Rotate(node->left);
+        return right_Rotate(node);
     }
 
     // Right Left Case
-    if (balance < -1 && key < node->right->key)
+    if (balance < -1 && value < node->right->value)
     {
-        node->right = rightRotate(node->right);
-        return leftRotate(node);
+        node->right = right_Rotate(node->right);
+        return left_Rotate(node);
     }
 
     return node;
@@ -115,39 +108,27 @@ void preOrder(Node *root)
 {
     if (root != NULL)
     {
-        cout << root->key << " ";
+        cout << root->value << " ";
         preOrder(root->left);
         preOrder(root->right);
     }
 }
 
-// Driver Code
 int main()
 {
     Node *root = NULL;
 
-    /* Constructing tree given in
-    the above figure */
-    root = insert(root, 10);
-    root = insert(root, 20);
-    root = insert(root, 30);
-    root = insert(root, 40);
-    root = insert(root, 50);
-    root = insert(root, 25);
+    int n;
+    cin >> n;
 
-    /* The constructed AVL Tree would be
-               30
-               / \
-             20   40
-            / \    \
-          10   25   50
-    */
-    cout << "Preorder traversal of the "
-            "constructed AVL tree is \n";
+    for (int i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+        root = insert(root, x);
+    }
+
     preOrder(root);
 
     return 0;
 }
-
-// This code is contributed by
-// rathbhupendra
