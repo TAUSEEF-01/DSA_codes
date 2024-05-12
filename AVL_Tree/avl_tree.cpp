@@ -104,6 +104,73 @@ Node *insert(Node *node, int value)
     return node;
 }
 
+Node *findBSTMin(Node *node)
+{
+    while (node->left != nullptr)
+    {
+        node = node->left;
+    }
+
+    return node;
+}
+
+Node *deleteBSTMin(Node *node)
+{
+    if (node == nullptr)
+        return nullptr;
+
+    if (node->left == nullptr)
+    {
+        Node *temp = node->right;
+        free(node);
+        return temp;
+    }
+
+    node->left = deleteBSTMin(node->left);
+    return node;
+}
+
+Node *deleteNode(Node *node, int number)
+{
+    if (node == nullptr)
+        return nullptr;
+
+    if (number < node->value)
+    {
+        node->left = deleteNode(node->left, number);
+    }
+    else if (number > node->value)
+    {
+        node->right = deleteNode(node->right, number);
+    }
+    else
+    {
+        if (node->left == nullptr && node->right == nullptr)
+        {
+            free(node);
+            return nullptr;
+        }
+        else if (node->left == nullptr)
+        {
+            Node *temp = node->right;
+            free(node);
+            return temp;
+        }
+        else if (node->right == nullptr)
+        {
+            Node *temp = node->left;
+            free(node);
+            return temp;
+        }
+
+        Node *temp = findBSTMin(node->right);
+        node->value = temp->value;
+        node->right = deleteBSTMin(node->right);
+    }
+
+    return node;
+}
+
 void preOrder(Node *root)
 {
     if (root != NULL)
@@ -127,6 +194,11 @@ int main()
         cin >> x;
         root = insert(root, x);
     }
+
+    preOrder(root);
+    cout << endl;
+
+    deleteNode(root, 10);
 
     preOrder(root);
 
