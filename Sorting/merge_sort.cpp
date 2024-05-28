@@ -15,9 +15,9 @@ void merge(int a[], int low, int mid, int high)
     int sz1 = mid - low + 1, sz2 = high - mid;
     int L[sz1], R[sz2];
 
-    int l = 0, r = 0, pos = low;
+    int l = 0, r = 0, pos = low; // pos equals low
 
-    for (int i = low, j = 0; i <= mid; i++, j++) // be careful --> i <= mid
+    for (int i = low, j = 0; i <= mid; i++, j++) // be careful --> i <= mid; i starts from low
     {
         L[j] = a[i];
     }

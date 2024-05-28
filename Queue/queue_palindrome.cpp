@@ -81,7 +81,7 @@ struct Queue
     {
         if (tail == NULL)
         {
-            return INT_MAX;
+            return '!';
         }
 
         int value = tail->ch;

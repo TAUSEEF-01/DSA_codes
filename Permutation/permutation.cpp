@@ -25,7 +25,7 @@ void generate_permutation(stack<char> stk, string a, int sz)
 
 int main()
 {
-    string s = "";
+    // string s = "";
     string a;
     cin >> a;
 
@@ -43,7 +43,7 @@ int main()
 // // int cnt = 0;
 // void permuteWords(string s, string word){
 //     if( s.size() == word.size() ){
-//         cnt++;
+//         // cnt++;
 //         cout << s << endl;
 //         return ;
 //     }
