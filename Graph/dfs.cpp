@@ -35,4 +35,6 @@ int main()
     }
 
     dfs(1);
+
+    return;
 }

@@ -5,7 +5,7 @@ const int M = 1e5 + 10;
 vector<int> g[M];
 
 bool vis[M];
-int level[M];
+// int level[M];
 
 void bfs(int source)
 {
@@ -24,7 +24,7 @@ void bfs(int source)
             {
                 a.push(child);
                 vis[child] = true;
-                level[child] = level[current_vertex] + 1;
+                // level[child] = level[current_vertex] + 1;
             }
         }
     }

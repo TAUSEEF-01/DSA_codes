@@ -90,15 +90,15 @@ Node *insert(Node *node, int value)
     // Left Right Case
     if (balance > 1 && value > node->left->value)
     {
-        node->left = left_Rotate(node->left);
-        return right_Rotate(node);
+        node->left = left_Rotate(node->left); // be careful ---> node->left is used twice not node
+        return right_Rotate(node); // be careful ---> only node is used
     }
 
     // Right Left Case
     if (balance < -1 && value < node->right->value)
     {
-        node->right = right_Rotate(node->right);
-        return left_Rotate(node);
+        node->right = right_Rotate(node->right); // be careful ---> node->right is used twice not node
+        return left_Rotate(node); // be careful ---> only node is used
     }
 
     return node;
@@ -181,6 +181,16 @@ void preOrder(Node *root)
     }
 }
 
+void inorder(Node *node)
+{
+    if(!node)
+        return;
+
+    inorder(node->left);
+    cout << node->value << ' ' << get_balance_factor(node) << endl;
+    inorder(node->right);
+}
+
 int main()
 {
     Node *root = NULL;
@@ -193,14 +203,17 @@ int main()
         int x;
         cin >> x;
         root = insert(root, x);
+        cout << root->value << endl;
     }
 
-    preOrder(root);
-    cout << endl;
+    // inorder(root);
 
-    deleteNode(root, 10);
+    // preOrder(root);
+    // cout << endl;
 
-    preOrder(root);
+    // deleteNode(root, 10);
+
+    // preOrder(root);
 
     return 0;
 }
