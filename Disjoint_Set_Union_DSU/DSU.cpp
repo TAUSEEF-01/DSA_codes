@@ -12,7 +12,7 @@ int find_parent(int v)
         return v;
 
     int root = find_parent(parent_depth_wise[v]);
-    parent_depth_wise[v] = root;
+    parent_depth_wise[v] = root; // path compression
     return root;
 }
 
@@ -38,25 +38,10 @@ void union_set(int u, int v)
     }
 }
 
-void initialize_values()
-{
-    for (int i = 0; i < sz; i++)
-    {
-        parent_depth_wise[i] = i;
-        node_rank[i] = 1;
-    }
-}
-
 // TOTAL NODE wise --->
 const int val_dsu = 1e5 + 10;
 int parent[val_dsu];
 int dsu_size[val_dsu];
-
-void make(int v)
-{
-    parent[v] = v;
-    dsu_size[v] = 1;
-}
 
 int find(int v)
 {
@@ -80,14 +65,32 @@ void Union_set(int a, int b)
     }
 }
 
+// void make(int v)
+// {
+//     parent[v] = v;
+//     dsu_size[v] = 1;
+// }
+
+void initialize_values()
+{
+    for (int i = 0; i < sz; i++)
+    {
+        parent_depth_wise[i] = i;
+        node_rank[i] = 1;
+        
+        parent[i] = i;
+        dsu_size[i] = 1;
+    }
+}
+
 int main()
 {
     initialize_values();
 
-    for (int i = 0; i < val_dsu; i++)
-    {
-        make(i);
-    }
+    // for (int i = 0; i < val_dsu; i++)
+    // {
+    //     make(i);
+    // }
 
     union_set(1, 2);
     union_set(1, 3);

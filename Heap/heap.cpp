@@ -27,14 +27,14 @@ void heapsort(int arr[], int n)
     // 1st heapify it ---> build max heap
     for (int i = n / 2 - 1; i >= 0; i--)
     {
-        heapify(arr, n, i);
+        heapify(arr, n, i); // pos -----> i and size -----> n
     }
 
     // then heapify the array again from the end so that the  ---> heap sort
     for (int i = n - 1; i >= 0; i--)
     {
         swap(arr[0], arr[i]);
-        heapify(arr, i, 0);
+        heapify(arr, i, 0); // pos -----> 0 and size ----> i; not n
     }
 }
 

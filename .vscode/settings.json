@@ -10,6 +10,8 @@
         "type_traits": "cpp",
         "utility": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "initializer_list": "cpp",
+        "valarray": "cpp"
     }
 }

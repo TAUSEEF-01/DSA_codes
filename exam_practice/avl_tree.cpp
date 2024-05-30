@@ -117,6 +117,28 @@ Node *insertNode(Node *node, int value)
     return node;
 }
 
+bool find_it(Node *node, int val)
+{
+    bool b1 = false, b2 = false;
+
+    if (node == NULL)
+    {
+        return false;
+    }
+    if (node->val == val)
+    {
+        return true;
+    }
+
+    if (val < node->val)
+        b1 = find_it(node->left, val);
+    else if (val > node->val)
+        b2 = find_it(node->right, val);
+
+    return b1 | b2;
+}
+
+
 void inorder(Node *node)
 {
     if (!node)
@@ -145,6 +167,21 @@ int main()
     }
 
     inorder(root);
+
+
+    // int m;
+    // cin >> m;
+
+    // for(int i = 0; i < m; i++)
+    // {
+    //     int q;
+    //     cin >> q;
+
+    //     if(find_it(root, q))
+    //     cout << 1 << endl;
+    //     else
+    //     cout << 0 << endl;
+    // }
 
     return 0;
 }
