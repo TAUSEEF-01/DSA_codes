@@ -85,11 +85,12 @@ int main()
             else if (s[i] == '/')
                 value = a.top() / value;
             else if (s[i] == '^')
-                value ^= a.top();
+                value = (int)pow(a.top(), value);
 
             a.pop();
 
             a.push(value);
+            // cout << value << endl;
         }
         else
         {
