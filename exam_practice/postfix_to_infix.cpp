@@ -83,8 +83,8 @@ int main()
 
     cin >> s;
 
-    // postfix_to_infix_calc(s);
-    postfix_to_infix(s);
+    postfix_to_infix_calc(s);
+    // postfix_to_infix(s);
 
     return 0;
 }
